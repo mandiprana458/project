@@ -1,0 +1,107 @@
+<section class="org-supadmin-dash">
+  <div class="container">
+    <h2 class="generate-text w-50 mx-auto" *ngIf="user_type == '2' || user_type == '1' || user_type == '4'">Admin
+      Dashboard</h2>
+    <h2 class="generate-text w-50 mx-auto" *ngIf="user_type == '3'">User Dashboard</h2>
+    <div class="org-sup-admin-dash">
+      <div class="sup-dash-content">
+        <!--organization super admin dashboard-->
+        <!--  user 1 = application super admin , user 2 = organisation admin , user 3 = user/csa/student, user 4 = admin -->
+        <ul *ngIf="user_type == '2'">
+          <li routerLink="/users/user-list">
+            <a>
+              <!-- <img src="assets/images/Icon awesome-user-alt.png"> -->
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <p class="sup-dash-menu">User</p>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/users/report-list">
+              <!-- <img src="assets/images/Icon open-spreadsheet.png"> -->
+              <i class="fa fa-file" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Reports</p>
+            </a>
+          </li>
+          <li routerLink="/users/org-details/{{org_Id | customIdEncode }}">
+            <a>
+              <!-- <img src="assets/images/Icon awesome-database.png"> -->
+              <i class="fa fa-building-o" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Organization Profile</p>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <!-- <img src="assets/images/Icon material-payment.png"> -->
+              <i class="fa fa-credit-card" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Payment Info</p>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="">
+              <img src="assets/images/Icon awesome-file-invoice.png">
+              <p class="sup-dash-menu">Invoices</p>
+            </a>
+          </li>
+          <li routerLink="/users/make-payment">
+            <a>
+              <img src="assets/images/Icon awesome-money-bill-alt.png">
+              <p class="sup-dash-menu">Make Payment</p>
+            </a>
+          </li> -->
+        </ul>
+        <!--application super admin dashboard-->
+        <ul *ngIf="user_type == '1'">
+          <li>
+            <a routerLink="/users/org-list">
+              <i class="fa fa-sitemap" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Organizations</p>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-table" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Reports Summary</p>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-cogs" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Application Settings</p>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-google-wallet" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Organization Payments</p>
+            </a>
+          </li>
+        </ul>
+        <!--user dashboard-->
+        <ul *ngIf="user_type == '3'">
+          <li *ngIf="org_type == 'HIGHER EDUCATION'">
+            <a routerLink="/users/submit-new-report">
+              <img src="assets/images/Icon open-spreadsheet.png">
+              <p class="sup-dash-menu">Submit New Report </p>
+            </a>
+          </li>
+          <li *ngIf="org_type == 'K12'">
+            <a routerLink="/users/submit-new-report-k12">
+              <img src="assets/images/Icon open-spreadsheet.png">
+              <p class="sup-dash-menu">Submit New Report </p>
+            </a>
+          </li>
+        </ul>
+        <!--Admin dashboard-->
+        <ul *ngIf="user_type == '4'">
+          <li>
+            <a routerLink="/users/preview-report-list">
+              <!-- <img src="assets/images/Icon open-spreadsheet.png"> -->
+              <i class="fa fa-file" aria-hidden="true"></i>
+              <p class="sup-dash-menu">Reports</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

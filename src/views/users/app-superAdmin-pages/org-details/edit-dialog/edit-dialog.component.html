@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-between" mat-dialog-title>
+    <p class="org-detail-left">{{title}}</p>
+    <button type="button" [mat-dialog-close] mat-icon-button><i class="fa fa-times"></i></button>
+  </div>
+  <div mat-dialog-content>
+          <mat-form-field appearance="outline">
+            <mat-label>Type...</mat-label>
+            <input matInput class="" [(ngModel)]= "name">
+          </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="justify-content-end">
+    <button mat-flat-button [mat-dialog-close] class="btn-common" (click)="saveEditedData()">Save</button>
+  </div>

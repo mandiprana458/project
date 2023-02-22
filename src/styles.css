@@ -1,0 +1,1121 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+
+body {
+    height: 100%;
+}
+
+ul,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 0px !important;
+    list-style-type: none;
+
+}
+
+.main-content {
+    height: 100%;
+    width: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+header {
+    background-color: #000000;
+}
+
+.logo-div {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sign-in-form {
+    position: absolute;
+    width: 100%;
+    border: none;
+    background: white;
+    padding: 50px 20px 20px 20px;
+    /* box-shadow: inset -1px 3px 9px -8px #000000; */
+}
+
+a {
+    transition: 0.3s;
+}
+
+.forgot-pass-text:hover {
+    color: #000000;
+}
+
+.form-div-content label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+input {
+    height: 40px;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+
+select {
+    height: 40px;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+
+.form-div-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+::-webkit-input-placeholder {
+    color: #CFCFCF;
+}
+
+.forgot-pass-text {
+    color: #FF8200;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+
+}
+
+.btn-common:hover {
+    background-color: white;
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.btn-common {
+    transition: 0.5s;
+    width: 100%;
+    color: white;
+    box-shadow: 3px 4px 5px #787878;
+    background-color: #000000;
+    border-radius: 5px;
+    height: 40px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.color-box {
+    height: 20px;
+    width: 40px;
+    border: 1px solid black;
+    background: green;
+    display: flex;
+    margin-right: 5px;
+}
+
+.orange-div {
+    height: 190px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FF8200;
+}
+
+.welcome-subtext {
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.welcome-text {
+    color: white;
+}
+
+.sign-in-content {
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.sign-in-form {
+    top: 200px;
+    /* border-radius: 60px; */
+}
+
+.orange-div {
+    height: 190px;
+}
+
+.reset-signin a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #FF8200;
+}
+
+.reset-signin {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 150px;
+}
+
+
+.forgot-pass-otp .sign-in-form p {
+    color: black;
+    text-align: center;
+}
+
+.forgot-pass-otp .container {
+    padding: 0px;
+}
+
+
+.content-label ul {
+    padding: 0px;
+}
+
+.content-label ul li select {
+    direction: rtl;
+    border-radius: 5px;
+    border: 1px solid #CFCFCF;
+    color: #3e3a3a;
+    width: 100%;
+    height: 40px;
+    text-align: left;
+    margin-bottom: 5px;
+    ;
+}
+
+.generate-report-content-div {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.city-state select {
+    direction: ltr;
+    border-radius: 5px;
+    border: 1px solid #CFCFCF;
+    color: #3e3a3a;
+    width: 49%;
+    height: 40px;
+    text-align: left;
+    margin-bottom: 5px;
+    ;
+}
+
+.content-label {
+    margin-bottom: 10px;
+}
+
+.content-label-ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-label-ul li {
+    width: calc(100% / 3 - 19px);
+
+}
+
+
+.time-incident-ul {
+    display: flex;
+}
+
+.time-incident-ul li {
+    width: calc(100% / 2 - 0px);
+}
+
+.time-incident-ul li:first-child {
+    margin-right: 10px;
+}
+
+.address-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-div input {
+    margin-bottom: 10px;
+}
+
+.city-state input:first-child {
+    margin-right: 10px;
+}
+
+.city-state input {
+    width: 49%;
+    margin-bottom: 10px;
+}
+
+.radio-yes-no {
+    display: flex;
+    align-items: center;
+}
+
+.radio-yes-no input {
+    margin-right: 5px;
+}
+
+.content-radio-btn {
+    display: flex;
+    align-items: center;
+}
+
+.content-radio-btn input {
+    margin-right: 10px;
+}
+
+.radio-yes-no {
+    margin-right: 15px;
+}
+
+.victim-info-ul li:nth-child(odd) {
+    margin-right: 16px;
+}
+
+.victim-info-ul li {
+    width: calc(100% / 2 - 8px);
+    margin-bottom: 10px !important;
+    float: left;
+}
+
+.victim-info-ul {
+    display: table;
+    width: 100%;
+}
+
+
+
+.checkox-container {
+    display: block;
+    position: relative;
+    font-weight: normal !important;
+    padding-left: 30px;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+/* Hide the original checkbox */
+input[type=checkbox] {
+    visibility: hidden;
+}
+
+.content-label-anchor {
+    font-style: italic;
+    color: #FF8200;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.content-label-anchor :hover {
+    color: #FF8200;
+    cursor: pointer;
+}
+
+/* creating a custom checkbox*/
+.mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 3px solid #D2D2D2;
+}
+
+/*background color to be shown when hovering over checkbox */
+/* .checkox-container:hover input~.mark {
+    background-color: gray;
+} */
+
+/*background color to be shown when the checkbox is checked */
+
+/* checkmark to be shown in checkbox */
+/* It will not be shown when unchecked */
+.mark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* display checkmark when checked */
+.checkox-container input:checked~.mark:after {
+    display: block;
+}
+
+/* creating a square to be the sign of 
+    checkmark */
+.checkox-container .mark:after {
+
+    width: 100%;
+    height: 100%;
+    background: #FF8200;
+}
+
+.mark {
+    padding: 0px !important;
+}
+
+.victim-info-ul input {
+    width: 100%;
+}
+
+.report-checkbox {
+    margin-top: 15px;
+}
+
+
+.content-label label {
+    font-weight: bold;
+}
+
+.content-label-headings {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.generate-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 0px;
+    border-radius: 0px 0px 15px 15px;
+    background: #FF8200;
+    color: #fff;
+    margin-bottom: 20px !important;
+    box-shadow: 0px 4px 7px -5px #000000;
+}
+
+.if-yes-suspect input {
+    width: calc(100% / 2 - 8px);
+    margin-bottom: 10px !important;
+}
+
+.if-yes-suspect input:first-child {
+    margin-right: 10px;
+}
+
+/* .sign-in-form form{
+    margin-top: 75px;
+} */
+.forgot-pass .container {
+    padding: 0px;
+}
+
+.note-div p {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.note-div textarea {
+    height: 90px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border: 1px solid #c6c6c6;
+    width: 100%;
+}
+
+.list-head-search .generate-text {
+    box-shadow: none;
+    margin-bottom: 0px !important;
+}
+
+.list-head-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 20px;
+    border-radius: 0px 0px 15px 15px;
+    background: #FF8200;
+    color: #fff;
+    margin-bottom: 20px !important;
+    box-shadow: 0px 4px 7px -5px #000000;
+}
+
+.logo-img-preview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px 0px;
+}
+
+.logo-img-preview img {
+    width: 200px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.logo-img-preview i {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-color: #FF8200;
+    color: #FF8200;
+}
+
+.logo-img-preview .upload-img-btn {
+    display: none;
+}
+
+.listreport-search-drop {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* }
+.listreport-search-drop .new-report-submit {
+    background-color: #000000;
+    color: white;
+}
+
+
+.list-report-content .accordion-button::after{
+    margin-left: inherit;
+    margin-right: 10px;
+}
+
+.list-report-content .accordion-flush .accordion-item .accordion-button{
+    direction: rtl;
+    justify-content: flex-end;
+    background: white;
+    box-shadow: inset 0px 1px 11px -9px #000000;
+    border-radius: 10px;
+} 
+
+.list-report-content .accordion-button:not(.collapsed){
+    color: black;
+    
+}
+.report-text-ans{
+    color: #FF8200;
+}
+
+.list-report-content .accordion-item:last-of-type .accordion-button.collapsed{
+    border-bottom-right-radius:10px !important;
+    border-bottom-left-radius:10px !important;
+}
+.list-report-subdiv{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+} */
+
+.visa-card-detail img {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 80px;
+}
+
+.visa-card-detail {
+    width: 100%;
+    /* padding-right: 30px; */
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+.card-info-text {
+    color: #000000;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.card-year-cvv input {
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.card-year-cvv {
+    display: flex;
+
+}
+
+
+.card-year-cvv input:first-child {
+    margin-right: 10px;
+}
+
+
+.listreport-search-drop .new-report-submit {
+    background-color: #000000;
+    color: white;
+}
+
+.list-report-content {
+    padding: 1px 15px;
+    box-shadow: inset 0px -1px 11px -6px #000000;
+    background: white;
+    margin: 20px 0px;
+    border-radius: 10px;
+}
+
+.listreport-search-drop .new-report-submit:hover,
+.listreport-search-drop .search-drop:hover {
+    color: white;
+}
+
+.listreport-search-drop .search-drop {
+    background-color: #000000;
+    color: white;
+}
+
+.report-id-div i {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #FF8200;
+    font-weight: bold;
+}
+
+.list-report-collapse {
+    margin-top: 15px;
+}
+
+.list-report-drop .report-name {
+    font-weight: bold;
+    color: black;
+}
+
+.report-id-ans {
+    color: #FF8200;
+    font-weight: bold;
+}
+
+.list-report-sub-collapse-right {
+    color: #FF8200;
+    word-wrap: break-word;
+}
+
+.list-report-sub-collapse-left {
+    font-weight: bold;
+    width: 60%;
+    padding-left: 25px;
+    color: black;
+}
+
+.list-report-more-text a {
+    color: #FF8200;
+    text-align: right;
+    text-decoration: none;
+}
+
+.list-report-more-text {
+    text-align: right;
+}
+
+.list-report-sub-collapse-right {
+    width: 40%;
+    text-align: left;
+    font-weight: 600;
+}
+
+.list-report-sub-collapse {
+    display: flex;
+    margin: 15px 0px;
+    padding-left: 20px;
+    justify-content: space-between;
+}
+
+.list-report-drop {
+    width: 100%;
+    text-decoration: none;
+}
+
+.report-id-div {
+    display: flex;
+    align-items: center;
+}
+
+.org-more-content {
+    margin-top: 20px;
+}
+
+.org-more-subcontent {
+    margin: 10px 0px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.org-more-sec h4 {
+    text-align: center;
+    font-weight: bold;
+    color: #000000;
+    margin: 15px 0px 20px 0px;
+}
+
+.org-detail-right i {
+    color: #A2A2A2;
+    margin-top: 8px;
+}
+
+.org-detail-left {
+    display: flex;
+    color: #000000;
+    font-weight: bold;
+    align-items: flex-start;
+    width: 60%;
+}
+
+.upload-img-btn {
+    border: none;
+}
+
+.org-detail-right {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.org-detail-right p {
+    margin-right: 10px;
+    font-weight: 600;
+    color: #FF8200;
+}
+
+.submit-back-orgdetail {
+    display: flex;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.submit-back-orgdetail button:first-child {
+    margin-right: 15px;
+}
+
+.logo-div img {
+    width: 30px;
+}
+
+.review-submit-content {
+    margin-top: 20px;
+}
+
+.review-submit-sec h4 {
+    color: #FF8200;
+    margin: 30px 0px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.logout-text {
+    display: flex;
+    color: #f05a28;
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.review-subcontent label {
+    font-weight: bold;
+}
+
+.review-subcontent p {
+    height: 40px;
+    background: #efefef;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.radio-yes-no p {
+    background-color: #fff;
+}
+
+.review-subcontent {
+    margin: 10px 0px;
+}
+
+.invoice-table tbody {
+    border: none !important;
+}
+
+.invoice-table thead tr td {
+    text-transform: uppercase;
+}
+
+.sno-design {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FF820099;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+}
+
+.invoice-table tbody tr {
+    border-bottom: 1px solid gray !important;
+}
+
+.invoice-table thead tr {
+    box-shadow: inset 0 0 10px #bdbdbd;
+    border-radius: 7px;
+}
+
+.checkox-container .mark {
+    margin-top: 3px;
+}
+
+.incident-subtext {
+    color: #000;
+    font-size: 20px;
+}
+
+.img-visa-card img {
+    width: 50px;
+}
+
+/* .img-visa-card p{
+
+} */
+
+.invoice-table {
+    margin-top: 20px;
+}
+
+.invoice-table td {
+    color: #000000;
+}
+
+.invoice-table thead td {
+    font-weight: bold;
+    color: #000000;
+}
+
+.invoice-content h3 {
+    color: #000000;
+    margin: 15px 0px;
+    font-weight: bold;
+}
+
+
+.succeed-td p {
+    color: rgb(0, 185, 0);
+    /* font-weight: bold; */
+}
+
+.content-label label {
+    margin-bottom: 10px;
+}
+
+.sup-dash-content ul li {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 1px 15px grey;
+    width: calc(100% / 6 - 20px);
+    margin: 10px;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.sup-dash-content ul li a img {
+    width: 60px;
+}
+
+.sup-dash-content ul li a i {
+    color: #f05a28;
+    font-size: 3.73em;
+}
+
+.sup-dash-content ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sup-dash-content ul {
+    display: flex;
+    padding: 0px;
+    justify-content: space-between;
+}
+
+.org-sup-admin-dash {
+    margin: 50px 0px;
+}
+
+.csa-sumbit-subtext {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #878787;
+}
+
+.list-search-div {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.list-search-div input {
+    height: 34px;
+}
+
+.list-search-div i {
+    position: absolute;
+    right: 10px;
+    font-size: 22px;
+}
+
+
+.selection-div {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.selection-div label {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+#terminate-popup {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    background: #000000cc;
+    top: 0;
+}
+
+.terminate-popup-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.terminate-popup-btn button {
+    width: 45%;
+    margin-bottom: 10px;
+}
+
+.popup-termiate-main {
+    width: 400px;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    padding: 26px;
+    border-radius: 5px;
+}
+
+.popup-termiate-main i {
+    position: absolute;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: normal;
+    top: 10px;
+
+}
+
+.popup-termiate-main p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.accordion {
+    background-color: #fff;
+    color: #FF8200;
+    cursor: pointer;
+    padding: 0px 18px 6px 0px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+#back-icon {
+    color: #FF8200;
+}
+
+.active,
+.accordion:hover {
+    /* background-color: #ccc; */
+}
+
+.panel {
+    padding: 0px 18px 4px 0px;
+    /* background-color: white; */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+@media screen and (max-width:1024px) {
+    .sign-in-content {
+        width: 75%;
+    }
+
+    .sign-in-form {
+        top: 200px;
+        /* border-radius: 60px; */
+    }
+
+    .orange-div {
+        height: 190px;
+    }
+
+    .generate-report-content-div {
+        width: 100%;
+    }
+
+    .sup-dash-content ul li a img {
+        width: 40px;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .sign-in-form {
+        top: 200px;
+    }
+
+    .card-year-cvv input {
+        margin-bottom: 15px;
+    }
+
+    .bank-detail-div {
+        flex-direction: column;
+    }
+
+    .bank-detail-div input {
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    .city-state {
+        display: flex;
+    }
+
+    .orange-div {
+        height: 190px;
+    }
+
+    .sign-in-form {
+        top: 200px;
+        /* border-radius: 60px; */
+    }
+
+    .sign-in-content {
+        width: 75%;
+    }
+
+    .sup-dash-content ul li a img {
+        width: 30px;
+    }
+
+    .sup-dash-content ul li a {
+        font-size: 12px;
+    }
+
+    .sup-dash-content ul li {
+        min-height: 75px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .sign-in-page .container {
+        padding: 0px;
+    }
+
+    .invoice-table {
+        margin-top: 10px;
+    }
+
+    .sup-dash-content ul {
+        flex-direction: column;
+    }
+
+    .sup-dash-content ul li {
+        width: 100%;
+        padding: 15px;
+        margin: 22px 0px;
+    }
+
+    .org-sup-admin-dash {
+        margin: 30px 0px;
+    }
+
+    .sup-dash-content ul li a img {
+        width: 50px;
+    }
+
+    .sup-dash-content ul li a {
+        font-size: 21px;
+    }
+
+    .sign-in-content {
+        width: 100%;
+    }
+
+    .orange-div {
+        height: 190px;
+    }
+
+    .sign-in-form {
+        top: 200px;
+        /* border-radius: 66px; */
+    }
+
+    .sign-in-btn {
+        margin-top: 20px;
+    }
+
+    .org-detail-left {
+        width: 50%;
+    }
+
+    .org-more-subcontent {
+        justify-content: space-between;
+    }
+
+    .submit-back-orgdetail {
+        width: 90%;
+    }
+
+    .list-report-sub-collapse {
+        padding: 0px;
+    }
+
+    .list-report-content {
+        padding: 1px 15px;
+    }
+
+    .content-radio-btn {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .city-state {
+        display: flex;
+    }
+
+    .victim-info-ul li {
+        width: 100%;
+    }
+
+    .list-search-div input {
+        width: 116px;
+    }
+}

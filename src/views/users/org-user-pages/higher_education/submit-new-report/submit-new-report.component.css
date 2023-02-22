@@ -1,0 +1,11 @@
+/* input[type=date]::-webkit-datetime-edit {
+    color: transparent
+} */
+
+.datePicker{
+    display: flex;
+    flex-direction: row;
+}
+.datePicker input{
+    width: 100%;
+}

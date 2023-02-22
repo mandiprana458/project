@@ -1,0 +1,7 @@
+.button-grp{
+    text-align: right;
+}
+
+mat-form-field input{
+    height: 20px;
+}

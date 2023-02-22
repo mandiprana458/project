@@ -1,0 +1,64 @@
+<section class="org-more-details">
+  <div class="container">
+    <div class="org-more-sec generate-report-content-div">
+      <h2 class="generate-text">User Details</h2>
+      <div class="org-more-content">
+        <div class="org-more-subcontent d-flex">
+          <p class="org-detail-left">User Name</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.firstName}} {{userDetailsArr?.lastName}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex">
+          <p class="org-detail-left">Role</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.roleName}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex">
+          <p class="org-detail-left">Contact</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.phoneNumber}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex">
+          <p class="org-detail-left">Email</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.email}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex" *ngIf="logged_in_user_type == '3'">
+          <p class="org-detail-left">Grade</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.grade}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex">
+          <p class="org-detail-left">Date of Birth</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.dob}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex" *ngIf="logged_in_user_type != '1'">
+          <p class="org-detail-left">Organization</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.organisationName}}</p>
+          </div>
+        </div>
+        <div class="org-more-subcontent d-flex" *ngIf="logged_in_user_type != '1'">
+          <p class="org-detail-left">Organization Type</p>
+          <div class="org-detail-right">
+            <p>{{userDetailsArr?.organisationType}}</p>
+          </div>
+        </div>
+        <div class="submit-back-orgdetail">
+          <button class="btn-common" (click)="goBack()">Back</button>
+          <button *ngIf="logged_in_user_type == '2' && user_id!=logged_in_user" class="btn-common"
+            routerLink="/users/edit-user-access/{{userDetailsArr?._id | customIdEncode}}">Edit
+            User Access</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#000000" type="ball-scale-multiple"></ngx-spinner>

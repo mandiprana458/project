@@ -1,0 +1,171 @@
+<section class="generate-report-div">
+    <div class="container">
+      <div class="generate-report-content-div">
+        <h2 class="generate-text">Add Organization</h2>
+        <form [formGroup]="addOrgForm" (ngSubmit)="onSubmit()">
+          <div class="gr-subcontent">
+            <div class="content-label">
+              <label>Name Of Organization</label>
+              <div class="address-div">
+                <input placeholder="Enter Name Of Organization" formControlName="orgName" />
+                <mat-error *ngIf="f.orgName.errors">
+                  <div
+                    *ngIf="
+                      (f.orgName.touched || submitted) && f.orgName.errors?.required
+                    "
+                  >
+                    This field is required.
+                  </div>
+                </mat-error>
+              </div>
+            </div>
+            <div class="content-label">
+              <label>Organization Type</label>
+              <div class="address-div">
+                <select formControlName="organisationType">
+                  <option value="K12">K12</option>
+                  <option value="HIGHER EDUCATION">HIGHER EDUCATION</option>
+                  <option value="TRANSPORTATION">TRANSPORTATION</option>
+                </select>
+                <mat-error *ngIf="f.organisationType.errors">
+                    <div
+                      *ngIf="
+                        (f.organisationType.touched || submitted) && f.organisationType.errors?.required
+                      "
+                    >
+                      This field is required.
+                    </div>
+                  </mat-error>
+              </div>
+            </div>
+            <div class="content-label">
+              <label>Super Admin Name</label>
+              <div class="address-div">
+                <input placeholder="Enter Super Admin Name" formControlName="adminName" />
+                <mat-error *ngIf="f.adminName.errors">
+                  <div
+                    *ngIf="
+                      (f.adminName.touched || submitted) && f.adminName.errors?.required
+                    "
+                  >
+                    This field is required.
+                  </div>
+                </mat-error>
+              </div>
+            </div>
+            <div class="content-label">
+                <label>Address</label>
+                <div class="address-div">
+                  <input placeholder="Enter Address" formControlName="address" />
+                  <mat-error *ngIf="f.address.errors">
+                    <div
+                      *ngIf="
+                        (f.address.touched || submitted) && f.address.errors?.required
+                      "
+                    >
+                      This field is required.
+                    </div>
+                  </mat-error>
+                </div>
+              </div>
+            <div class="content-label">
+              <label>Email</label>
+              <div class="address-div">
+                <input placeholder="Enter Your Email" formControlName="email" />
+                <mat-error *ngIf="f.email.errors">
+                    <div
+                      *ngIf="
+                        (f.email.touched || submitted) && f.email.errors?.required
+                      "
+                    >
+                      This field is required.
+                    </div>
+                    <div
+                      *ngIf="
+                        (f.email.touched || submitted) && f.email.errors?.pattern
+                      "
+                    >
+                      Invalid Email
+                    </div>
+                  </mat-error>
+              </div>
+            </div>
+            <div class="content-label">
+              <label>Phone Number</label>
+              <div class="address-div">
+                <input
+                  maxlength="12"
+                  placeholder="Enter Contact Details"
+                  formControlName="contact"
+                />
+                <mat-error *ngIf="f.contact.errors">
+                  <div
+                    *ngIf="
+                      (f.contact.touched || submitted) &&
+                      f.contact.errors?.required
+                    "
+                  >
+                    This field is required.
+                  </div>
+                  <div
+                    *ngIf="
+                      (f.contact.touched || submitted) && f.contact.errors?.pattern
+                    "
+                  >
+                    Invalid Contact
+                  </div>
+                </mat-error>
+              </div>
+            </div>
+            <div class="content-label">
+              <label>Subscription Fees</label>
+              <div class="address-div">
+                <input placeholder="Enter Subscription Fees" formControlName="fees" />
+                <mat-error *ngIf="f.fees.errors">
+                    <div
+                      *ngIf="
+                        (f.fees.touched || submitted) && f.fees.errors?.required
+                      "
+                    >
+                      This field is required.
+                    </div>
+                  </mat-error>
+              </div>
+            </div>
+            <div class="content-label">
+                <label>Subscription Frequency</label>
+                <div class="address-div">
+                  <!-- <input placeholder="Enter Subscription Frequency" formControlName="frequency" /> -->
+                  <select formControlName="frequency">
+                    <option value="YEARLY">YEARLY</option>
+                    <option value="MONTHLY">MONTHLY</option>
+                    <option value="WEEKLY">WEEKLY</option>
+                  </select>
+                  <mat-error *ngIf="f.frequency.errors">
+                      <div
+                        *ngIf="
+                          (f.frequency.touched || submitted) && f.frequency.errors?.required
+                        "
+                      >
+                        This field is required.
+                      </div>
+                    </mat-error>
+                </div>
+              </div>
+            <div class="review-submit-btn text-center mb-2 mt-3">
+              <button class="btn-common w-50 mt-md-3" type="submit">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <ngx-spinner 
+     bdColor="rgba(51,51,51,0.8)"
+     size="large"
+     color="#000000"
+     type="ball-scale-multiple"></ngx-spinner>
+  

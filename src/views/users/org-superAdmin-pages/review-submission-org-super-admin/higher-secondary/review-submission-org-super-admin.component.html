@@ -1,0 +1,562 @@
+<section class="review-submission">
+    <div class="container">
+      <div class="review-submit-sec generate-report-content-div">
+        <h2 class="generate-text">Review Submission</h2>
+        <div class="review-submit-content">
+          <div class="review-subcontent" *ngIf="reviewData.incidentDay && reviewData.incidentMonth && reviewData.incidentYear">
+            <label>Incident Date </label>
+            <p>{{reviewData.incidentDay}}th {{reviewData.incidentMonth}}, {{reviewData.incidentYear}}</p>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.incidentHours && reviewData.incidentMinutes && reviewData.amPm">
+            <label>Incident Time </label>
+            <p>{{reviewData.incidentHours}}:{{reviewData.incidentMinutes}} {{reviewData.amPm}}</p>
+          </div>
+          <div class="review-subcontent">
+            <label>Incident Location</label>
+            <p *ngIf="reviewData.incidentAddress != ''">{{reviewData.incidentAddress}}, {{reviewData.incidentCity}},
+              {{reviewData.incidentState}}</p>
+            <p *ngIf="reviewData.incidentAddress2 != ''">{{reviewData.incidentAddress2}}, {{reviewData.incidentCity}},
+              {{reviewData.incidentState}}</p>
+          </div>
+          <div class="review-subcontent">
+            <label>Postal Zip </label>
+            <p>{{reviewData.incidentZip}} </p>
+          </div>
+          <div class="review-subcontent">
+            <label>Incident Country </label>
+            <p>{{reviewData.incidentCountry}} </p>
+          </div>
+  
+          <div class="review-subcontent">
+            <label>Did the incident happen on an owned, controlled or lease property of institution ?</label>
+            <div class="radio-yes-no mr-2" *ngIf="reviewData.onControlPropOfInst == 'true'">
+              <input type="radio" checked>
+              <p>Yes</p>
+            </div>
+            <div class="radio-yes-no mr-2" *ngIf="(reviewData.onControlPropOfInst == 'false')">
+              <input type="radio" checked>
+              <p>No</p>
+            </div>
+          </div>
+          <div class="review-subcontent" *ngIf="(reviewData.onControlPropOfInst == 'false')">
+            <label>Did the incident happen on property owned or controlled by an officially recognized student
+              organization ?</label>
+            <div class="radio-yes-no mr-2" *ngIf="reviewData.onControlStudentOrg == 'true'">
+              <input type="radio" checked>
+              <p>Yes</p>
+            </div>
+            <div class="radio-yes-no mr-2" *ngIf="(reviewData.onControlStudentOrg == 'false')">
+              <input type="radio" checked>
+              <p>No</p>
+            </div>
+          </div>
+          <div class="review-subcontent" *ngIf="(reviewData.onControlStudentOrg == 'false')">
+            <label>Did the incident happen on public property within the campus, or immediately adjacent to and accessible from the campus ? </label>
+            <div class="radio-yes-no mr-2" *ngIf="reviewData.onControlPublicProperty == 'true'">
+              <input type="radio" checked>
+              <p>Yes</p>
+            </div>
+            <div class="radio-yes-no mr-2" *ngIf="(reviewData.onControlPublicProperty == 'false')">
+              <input type="radio" checked>
+              <p>No</p>
+            </div>
+          </div>
+          <div class="review-subcontent">
+            <label>Victim Info </label>
+            <p>{{reviewData.victimFirstName}} {{reviewData.victimLastName}}</p>
+          </div>
+          <div class="review-subcontent">
+            <label>Phone </label>
+            <p>{{reviewData.victimPhone}} </p>
+          </div>
+          <div class="review-subcontent">
+            <label>Email </label>
+            <p>{{reviewData.victimEmail}}</p>
+          </div>
+          <div class="review-subcontent">
+            <label>Is there any suspect?</label>
+            <div class="radio-yes-no mr-2" *ngIf="reviewData.anySuspect">
+              <input type="radio" checked>
+              <p>Yes</p>
+            </div>
+            <div class="radio-yes-no" *ngIf="(!reviewData.anySuspect)">
+              <input type="radio" checked>
+              <p>No</p>
+            </div>
+          </div>
+          <ng-container *ngIf="reviewData.anySuspect">
+            <div class="review-subcontent">
+              <label>Suspect Name </label>
+              <p>{{reviewData.suspectName}} </p>
+            </div>
+            <div class="review-subcontent">
+              <label>Phone </label>
+              <p>{{reviewData.suspectPhone}} </p>
+            </div>
+          </ng-container>
+          <div class="review-subcontent" *ngIf="reviewData.witnessCount != '0'">
+            <label>Was there any Witness? If so , how many?</label>
+            <div class="radio-yes-no mr-2" *ngIf="reviewData.witnessCount == '1'">
+              <input type="radio" checked>
+              <p>1 Witness</p>
+            </div>
+            <div class="radio-yes-no" *ngIf="reviewData.witnessCount == '2'">
+              <input type="radio" checked>
+              <p>2 Witness</p>
+            </div>
+          </div>
+          <ng-container *ngIf="reviewData.witnessCount != '0'">
+            <div class="review-subcontent">
+              <label>Witness1 Name </label>
+              <p>{{reviewData.witness1Name}} </p>
+            </div>
+            <div class="review-subcontent">
+              <label>Witness1 Contact </label>
+              <p>{{reviewData.witness1Contact}} </p>
+            </div>
+            <div class="review-subcontent">
+              <label>Witness1 Email </label>
+              <p>{{reviewData.witness1Email}} </p>
+            </div>
+            <div class="review-subcontent" *ngIf="reviewData.witnessCount == '2'">
+              <label>Witness2 Name </label>
+              <p>{{reviewData.witness2Name}} </p>
+            </div>
+            <div class="review-subcontent" *ngIf="reviewData.witnessCount == '2'">
+              <label>Witness2 Contact </label>
+              <p>{{reviewData.witness2Contact}} </p>
+            </div>
+            <div class="review-subcontent" *ngIf="reviewData.witnessCount == '2'">
+              <label>Witness2 Email </label>
+              <p>{{reviewData.witness2Email}} </p>
+            </div>
+          </ng-container>
+          <div class="review-subcontent">
+            <label>Criminal Homicide</label>
+            <label class="checkox-container" *ngIf="reviewData.nonNegligentSlaughter">
+              Murder & Non-neglignent mansilaughter
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.negligentSlaughter">
+              Neglignent mansilaughter
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Sexual Offenses</label>
+            <label class="checkox-container" *ngIf="reviewData.rape">
+              Rape
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.pending">
+              Pending
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.incest">
+              Incest
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.sRape">
+              Statutory Rape
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Other</label>
+            <label class="checkox-container" *ngIf="reviewData.robbery">
+              Robbery
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.AggrAssault">
+              Aggressive Assault
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.burglary">
+              Burglary
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.otherArson">
+              Arson
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.otherMotorTheft">
+              Motor Vehicle Theft
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Clearly Arrest / Refferals</label>
+            <label class="checkox-container" *ngIf="reviewData.wLawViolate">
+              Weapons Law Violation
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.dAbuseViolate">
+              Drug abuse Violations
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.lLawViolate">
+              Liquior Law Violation
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.arrestArson">
+              Arson
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.arrestMotorTheft">
+              Motor Vehicle Theft
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Clery Hate Crimes </label>
+            <label class="checkox-container" *ngIf="reviewData.larcencyTheft">
+              Larceny-theft
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.simpleAssault">
+              Simple Assault
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.intimidation">
+              Intimidation
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.desDamage">
+              Destruction Damage
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Bias Category </label>
+            <label class="checkox-container" *ngIf="reviewData.race">
+              Race
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.gender">
+              Gender
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.religion">
+              Religion
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.natOrigin">
+              National Origin
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.sexOrientation">
+              Sexual Orientation
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.genderIdentity">
+              Gender Identity
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.ethnicity">
+              Ethnicity
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.disability">
+              Disability
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Clery Sexual Violence Crimes</label>
+            <label class="checkox-container" *ngIf="reviewData.domViolence">
+              Domestic Violence
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.datingViolence">
+              Dating Violence
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.stalking">
+              Stalking
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent">
+            <label>Others / Non Clery </label>
+            <label class="checkox-container" *ngIf="reviewData.threat">
+              Threat
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.healthRisk">
+              Health Risk
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.sadnessDepression || reviewData.hisroryDepression || reviewData.hopelessDepression || reviewData.suicidalDepression || reviewData.lowEnergyDepression || reviewData.failureDepression">
+            <label> Depression</label>
+  
+  
+            <label class="checkox-container" *ngIf="reviewData.sadnessDepression">
+              Have you experienced extreme sadness or hopelessness?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.hisroryDepression">
+              Does your family have a history of depression?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.hopelessDepression">
+              Have you turned to drinking or drug use to relieve feelings of hopelessness?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.suicidalDepression">
+              Have you experienced thoughts of death or suicide?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.lowEnergyDepression">
+              Are you feeling unusually tired or having very low energy?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.failureDepression">
+              Do you feel bad about yourself, that you are a failure or are letting people down?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.notesDepression">
+            <label>Depression Description</label>
+            <p>{{reviewData.notesDepression}}</p>
+          </div>
+  
+          <div class="review-subcontent">
+            <label> Anxiety</label>
+  
+  
+            <label class="checkox-container" *ngIf="reviewData.dailyAnxiety">
+              Are you experiencing anxious or worrisome thoughts on a daily basis?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.concentrationAnxiety">
+              Are you experiencing trouble concentrating in school or work?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.fearAnxiety">
+              Are you plagued by fears others may find unfounded or irrational?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.unsocialAnxiety">
+              Do you avoid everyday social activities because they cause you anxiety?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.healthAnxiety">
+              Do you experience sudden rapid heartbeat, tightness or pain in your chest?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.interferingAnxiety">
+              Is your anxiety interfering with your school, work, and/or relationships?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.notesAnxiety">
+            <label>Anxiety Description</label>
+            <p>{{reviewData.notesAnxiety}}</p>
+          </div>
+  
+          <div class="review-subcontent">
+            <label> Suicidal Thoughts and Intent</label>
+  
+  
+            <label class="checkox-container" *ngIf="reviewData.deadwishSuicide">
+              Have you had wishes to be dead? (past 1 month)
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.nonSpecificReasonSuicide">
+              Have you had suicidal thoughts (non-specific) in the last month? (Past 1 month)
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.nospecificReasonSuicide">
+              Have you had suicidal thoughts with some intent to act, without a specific plan? (Past 1
+              month)
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.specificReasonSuicide">
+              Have you had active Suicidal thoughts with a specific plan and intent? (past 1 month)
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.behaviourSuicide">
+              Have you had suicidal behavior anytime in your life?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.notesSuicide">
+            <label>Suicidal Thoughts and Intent Description</label>
+            <p>{{reviewData.notesSuicide}}</p>
+          </div>
+  
+          <div class="review-subcontent">
+            <label>Eating Disorders</label>
+  
+  
+            <label class="checkox-container" *ngIf="reviewData.refuseEatDisorder">
+              Do you refuse to eat food or skip meals?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.publicEatDisorder">
+              Do you fear eating out in public with others?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.caloriesEatDisorder">
+              Do you count calories out of a need for control?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.breakingEatDisorder">
+              Do you follow strict eating habits that you feel guilty and ashamed for breaking?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.bodyShapeEatDisorder">
+              Are you obsessed or dissatisfied with your weight or body shape?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.vomitEatDisorder">
+              Do you find yourself eating large amounts of food and then purging, making yourself
+              vomit, or feeling like you have to do something (e.g., exercise) to compensate for the
+              food you just ate?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.notesEatDisorder">
+            <label>Eating Disorders Description</label>
+            <p>{{reviewData.notesEatDisorder}}</p>
+          </div>
+  
+          <div class="review-subcontent">
+            <label> Substance Misuse</label>
+  
+  
+            <label class="checkox-container" *ngIf="reviewData.drugsNASubstanceMisuse">
+              Do you feel uncomfortable when drugs or alcohol are not available?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+  
+            <label class="checkox-container" *ngIf="reviewData.drinkSubstanceMisuse">
+              Do you drink or use substances when you're disappointed or sad?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.friendsSubstanceMisuse">
+              Have you ever been unable to remember part of the previous evening, even though your friends say you didn't
+              pass out?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.concernSubstanceMisuse">
+              Has a friend or family member expressed concern about your alcohol or drug use?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.relativesSubstanceMisuse">
+              Have any of your blood relatives ever had an addiction to drugs or alcohol?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.struggleSubstanceMisuse">
+              Do you struggle to decrease your drug and alcohol use?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.alcoholSubstanceMisuse">
+              Has your using of alcohol or other drugs increased?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.decidedSubstanceMisuse">
+              Do you find yourself using when you had decided not to?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.lifeSubstanceMisuse">
+              Are you having problems in your life that wouldn’t have happened if you had not used substances?
+              (Relationships, home responsibilities, activities, work, or school)
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+            <label class="checkox-container" *ngIf="reviewData.upsetSubstanceMisuse">
+              Do you find yourself feeling restless, irritable, or upset when you don’t use?
+              <input type="checkbox" checked>
+              <span class="mark"></span>
+            </label>
+          </div>
+          <div class="review-subcontent" *ngIf="reviewData.notesSubstanceMisuse">
+            <label>Substance Misuse Description</label>
+            <p>{{reviewData.notesSubstanceMisuse}}</p>
+          </div>
+          <div class="review-subcontent">
+            <label>Note</label>
+            <p>{{reviewData.note}}</p>
+          </div>
+          <div class="review-submit-btn text-center mb-5">
+            <button class="btn-common  w-25  " (click)="onClickFinalSubmit()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#000000" type="ball-scale-multiple"></ngx-spinner>

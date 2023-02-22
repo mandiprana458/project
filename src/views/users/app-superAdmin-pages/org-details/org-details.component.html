@@ -1,0 +1,111 @@
+<section class="org-more-details">
+  <div class="container">
+    <div class="org-more-sec generate-report-content-div">
+      <h2 class="generate-text">Organization Details</h2>
+      <form (ngSubmit)="onSubmit()" [formGroup]="orgDetailsForm">
+        <div class="org-more-content">
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Organization Name</p>
+            <div class="org-detail-right">
+              <p>{{orgDetailsArr?.name}}</p>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(1,orgDetailsArr?.name)" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Super Admin Name</p>
+            <div class="org-detail-right">
+              <p>{{orgDetailsArr?.superAdminName}}</p>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(2,orgDetailsArr?.superAdminName)"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Address</p>
+            <div class="org-detail-right">
+              <p>{{orgDetailsArr?.address ? orgDetailsArr?.address : '--'}}</p>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(3,orgDetailsArr?.address)"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Contact</p>
+            <div class="org-detail-right">
+              <p>{{orgDetailsArr?.contactNumber}}</p>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(4,orgDetailsArr?.contactNumber)"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Email</p>
+            <div class="org-detail-right">
+              <p>{{orgDetailsArr?.contactEmail}}</p>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(9,orgDetailsArr?.contactEmail)"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Subscription Fees ($)</p>
+            <div class="org-detail-right">
+              <p>{{(orgDetailsArr?.subscriptionFees).toFixed(2)}}</p>
+              <i class="fa fa-pencil-square-o" *ngIf="user_type == '1'"
+                (click)="openEditDialog(5,orgDetailsArr?.subscriptionFees)" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Subscription Frequency</p>
+            <div class="org-detail-right">
+              <p>{{orgDetailsArr?.subscriptionFrequency}}</p>
+              <i class="fa fa-pencil-square-o" *ngIf="user_type == '1'"
+                (click)="openEditDialog(6,orgDetailsArr?.subscriptionFrequency)" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Banner Color</p>
+            <div class="org-detail-right">
+              <div class="d-flex align-items-center">
+                <span [style.background]="bannerColor" class="color-box"></span>
+                <p>{{orgDetailsArr?.bannerColor}}</p>
+              </div>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(7,orgDetailsArr?.bannerColor)"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="org-more-subcontent d-flex">
+            <p class="org-detail-left">Header Color</p>
+            <div class="org-detail-right">
+              <div class="d-flex align-items-center">
+                <span [style.background]="headerColor" class="color-box"></span>
+                <p>{{orgDetailsArr?.headerColor}}</p>
+              </div>
+              <i class="fa fa-pencil-square-o" (click)="openEditDialog(8,orgDetailsArr?.headerColor)"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <!-- <div class="org-more-subcontent d-flex">
+              <p class="org-detail-left">Upload Logo</p>
+              <div class="org-detail-right">
+                <input type="file" class="upload-img-btn" accept="image/*" (change)="checkImage($event)" placeholder="Choose File">
+              </div>
+            </div>
+            <div  class="logo-img-preview">
+              <img *ngIf="recent_image != ''" src="{{recent_image}}">
+              <img *ngIf="recent_image == ''" src="assets/images/reebok.png">
+            </div> -->
+          <div class="logo-img-preview">
+            <label for="file-input">
+              <img *ngIf="recent_image != ''" src="{{recent_image}}">
+              <i class="fa fa-upload fa-border fa-5x" *ngIf="recent_image == ''"></i>
+            </label>
+            <input type="file" id="file-input" class="upload-img-btn" accept="image/*" (change)="checkImage($event)"
+              placeholder="Choose File">
+          </div>
+          <div class="submit-back-orgdetail">
+            <button class="btn-common" type="button" (click)="goBack()">Back</button>
+            <button class="btn-common" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#000000" type="ball-scale-multiple"></ngx-spinner>

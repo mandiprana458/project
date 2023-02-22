@@ -1,0 +1,121 @@
+<header>
+  <div class="hamburgur-parent">
+    <button id="hamburgur" class="hamurgur" [hidden]="(current_route == '/signin')">
+      <i class="fa fa-bars"></i>
+    </button>
+    <button class="hamurgur"
+      [hidden]="(!(isLogoutVisible == '1' && user_type != '3') || (current_route == '/users/dashboard') || (current_route == '/signin'))">
+      <i backButton id="back-icon" class="fa fa-chevron-circle-left fa-lg"></i>
+    </button>
+  </div>
+  <div class="logo-div">
+    <div class="logout-text" data-toggle="tooltip" data-placement="top" title="Logout"
+      *ngIf="isLogoutVisible == '1' && user_type == '3' && (current_route != '/signin')" (click)="onClickSignOut()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+    </div>
+    <img src="./assets/images/logo.png" />
+  </div>
+</header>
+<div class="d-flex flex-column flex-shrink-0 p-3 main-sidebar" style="width: 100px;" *ngIf="isLogoutVisible == '1'">
+  <div class="side-bar-parent">
+    <!--  user 1 = application super admin , user 2 = organization admin , user 3 = user/csa/student -->
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Dashboard" *ngIf="user_type != '3'"
+      routerLink="/users/dashboard">
+      <i class="fa fa-home" aria-hidden="true"></i>
+      <!-- <p>Home</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Users" *ngIf="user_type == '2'"
+      routerLink="/users/user-list">
+      <i class="fa fa-user" aria-hidden="true"></i>
+      <!-- <p>User</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Reports"
+      *ngIf="user_type == '2' || user_type == '4'" routerLink="/users/report-list">
+      <i class="fa fa-file" aria-hidden="true"></i>
+      <!-- <p>Reports</p> -->
+    </div>
+
+    <!-- <div class="sidebar-content" *ngIf="user_type == '2'" routerLink="/users/org-details/{{org_Id | customIdEncode }}">
+      <img src="../../../assets/images/Icon awesome-database.png">
+
+      <p>Organization Profile</p>
+    </div> -->
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Organization Profile"
+      *ngIf="user_type == '2'" routerLink="/users/org-details/{{org_Id | customIdEncode }}">
+      <i class="fa fa-building-o" aria-hidden="true"></i>
+      <!-- <p>Organization Profile</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Payment Info"
+      *ngIf="user_type == '2'">
+      <i class="fa fa-credit-card" aria-hidden="true"></i>
+      <!-- <p>Payment Info</p> -->
+    </div>
+    <!-- <div class="sidebar-content" *ngIf="user_type == '2'">
+      <img src="../../../assets/images/Icon awesome-file-invoice.png">
+      <p>Invoices</p>
+    </div>
+    <div class="sidebar-content" *ngIf="user_type == '2'" routerLink="/users/make-payment">
+      <i class="fa fa-credit-card" aria-hidden="true"></i>
+      <p>Make Payment</p>
+    </div> -->
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Organizations"
+      *ngIf="user_type == '1'" routerLink="/users/org-list">
+      <i class="fa fa-sitemap" aria-hidden="true"></i>
+      <!-- <p>Organizations</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Report Summary"
+      *ngIf="user_type == '1'">
+      <i class="fa fa-table" aria-hidden="true"></i>
+      <!-- <p>Report Summary</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Application Settings"
+      *ngIf="user_type == '1'">
+      <i class="fa fa-cogs" aria-hidden="true"></i>
+      <!-- <p>Application Setting</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Organization Payment"
+      *ngIf="user_type == '1'">
+      <i class="fa fa-google-wallet" aria-hidden="true"></i>
+      <!-- <p>Organization Payments</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Generate Report"
+      *ngIf="user_type == '3' && org_type == 'HIGHER EDUCATION'" routerLink="/users/submit-new-report">
+      <i class="fa fa-file-text" aria-hidden="true"></i>
+      <!-- <p>Organization Payments</p> -->
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Generate Report"
+      *ngIf="user_type == '3' && org_type == 'K12'" routerLink="/users/submit-new-report-k12">
+      <i class="fa fa-file-text" aria-hidden="true"></i>
+      <!-- <p>Organization Payments</p> -->
+    </div>
+    <!-- <div class="sidebar-content" *ngIf="user_type == '3'" routerLink="/users/submit-new-report">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72.312" height="67.852"
+        viewBox="0 0 72.312 67.852">
+        <defs>
+          <filter id="Icon_open-spreadsheet" x="0" y="0" width="72.312" height="67.852" filterUnits="userSpaceOnUse">
+            <feOffset dy="3" input="SourceAlpha" />
+            <feGaussianBlur stdDeviation="0.5" result="blur" />
+            <feFlood flood-opacity="0.161" />
+            <feComposite operator="in" in2="blur" />
+            <feComposite in="SourceGraphic" />
+          </filter>
+        </defs>
+        <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Icon_open-spreadsheet)">
+          <path id="Icon_open-spreadsheet-2" data-name="Icon open-spreadsheet"
+            d="M6.5,0A6.7,6.7,0,0,0,0,6.788V56.565a6.7,6.7,0,0,0,6.5,6.788H62.814a6.7,6.7,0,0,0,6.5-6.788V6.788A6.7,6.7,0,0,0,62.814,0ZM8.664,9.05h8.664V18.1H8.664Zm17.328,0H60.648V18.1H25.992ZM8.664,27.151h8.664V36.2H8.664Zm17.328,0H60.648V36.2H25.992ZM8.664,45.252h8.664V54.3H8.664Zm17.328,0H60.648V54.3H25.992Z"
+            transform="translate(1.5)" fill="#FF8200" />
+        </g>
+      </svg>
+      <p>Submit New Report </p>
+    </div> -->
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Profile"
+      routerLink="/users/user-details/{{user_id | customIdEncode}}">
+      <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+    </div>
+    <div class="sidebar-content" data-toggle="tooltip" data-placement="top" title="Logout"
+      *ngIf="isLogoutVisible == '1'" (click)="onClickSignOut()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+      <!-- <p>Logout</p> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<section class="generate-report-div">
+  <div class="container">
+    <div class="generate-report-content-div">
+      <div class="list-head-search">
+        <h2 class="generate-text">List of Reports</h2>
+        <div class="list-search-div">
+          <input placeholder="search">
+          <i class='fa fa-search'></i>
+        </div>
+      </div>
+      <div class="p-3">
+        <div class="listreport-search-drop">
+          <div class="dropdown search-dropdown">
+            <button class="btn search-drop dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="true">
+              Crime Type
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li *ngFor="let obj of filterList"><a class="dropdown-item"
+                  (click)="filterByCrimeType(obj.booleanKey)">{{obj.name}}</a></li>
+            </ul>
+          </div>
+          <button *ngIf="org_type == 'HIGHER EDUCATION'" routerLink="/users/submit-new-report"
+            class="new-report-submit btn">
+            <!-- <i class="fa fa-user"></i> -->
+            Submit New Report
+          </button>
+          <button *ngIf="org_type == 'K12'" routerLink="/users/submit-new-report-k12" class="new-report-submit btn">
+            <!-- <i class="fa fa-user"></i> -->
+            Submit New Report
+          </button>
+        </div>
+        <div class="list-report-content" *ngFor="let eachUser of reportListArr; let i= index">
+          <a href="#demo{{i+1}}" class=" list-report-drop " data-bs-toggle="collapse" aria-expanded="false"
+            role="button">
+            <div class="list-report-sub-collapse">
+              <div class="report-id-div">
+                <i class="fa fa-angle-down"></i>
+                <p class="report-name">Report Id</p>
+              </div>
+              <p class="list-report-sub-collapse-right">{{eachUser._id}}</p>
+            </div>
+          </a>
+          <div id="demo{{i+1}}" class="collapse list-report-collapse">
+            <div class="list-report-sub-collapse">
+              <p class="list-report-sub-collapse-left">Incident Date</p>
+              <p class="list-report-sub-collapse-right">{{getDateFromTimestamp(eachUser.incidentDate)}}</p>
+            </div>
+            <!-- <div class="list-report-sub-collapse" *ngIf="org_type == 'HIGHER EDUCATION'">
+              <p class="list-report-sub-collapse-left">Description</p>
+              <p class="list-report-sub-collapse-right">--</p>
+            </div> -->
+            <div class="list-report-sub-collapse">
+              <p class="list-report-sub-collapse-left">Description</p>
+              <p class="list-report-sub-collapse-right">{{makeDescription(eachUser)}}</p>
+            </div>
+            <div class="list-report-sub-collapse">
+              <p class="list-report-sub-collapse-left">Reported by</p>
+              <p class="list-report-sub-collapse-right">{{eachUser.createdByFullName}}</p>
+            </div>
+            <p class="list-report-more-text text-right" *ngIf="user_type == '2' && org_type == 'HIGHER EDUCATION'"><a
+                routerLink="/users/edit-report-listHEd/{{eachUser._id}}"><b><i>Edit
+                    >></i></b></a></p>
+            <p class="list-report-more-text text-right" *ngIf="user_type == '2' && org_type == 'K12'"><a
+                routerLink="/users/edit-report-listk12/{{eachUser._id}}"><b><i>Edit
+                    >></i></b></a></p>
+            <p class="list-report-more-text text-right" *ngIf="user_type == '4'"><a
+                routerLink="/users/preview-report-details/{{eachUser._id}}"><b><i>Preview >></i></b></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#000000" type="ball-scale-multiple"></ngx-spinner>

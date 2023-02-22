@@ -1,0 +1,100 @@
+<section class="generate-report-div">
+  <div class="container">
+    <div class="generate-report-content-div">
+      <h2 class="generate-text">List Of Organization</h2>
+      <div class="search-by-div">
+        <mat-form-field appearance="outline">
+          <mat-label>Search Keyword</mat-label>
+          <input matInput placeholder="Search by" (keyup.enter)="applyFilter()" [(ngModel)]="searchedText" />
+        </mat-form-field>
+        <!-- <div class="dropdown search-dropdown">
+            <button class="btn search-drop dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Search By
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Name</a></li>
+              <li><a class="dropdown-item" href="#">Email</a></li>
+              <li><a class="dropdown-item" href="#">Contact</a></li>
+            </ul>
+          </div> -->
+        <div class="dropdown search-dropdown">
+          <mat-form-field appearance="outline">
+            <mat-label>Search By</mat-label>
+            <mat-select [(ngModel)]="searchedType">
+              <mat-option value="">Search</mat-option>
+              <mat-option value="Name">Name</mat-option>
+              <mat-option value="Email">Email</mat-option>
+              <mat-option value="Contact">Contact</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="listreport-search-drop">
+        <button class="new-report-submit btn" routerLink="/users/org-add">
+          <i class="fa fa-plus"></i>
+          Add Organization
+        </button>
+        <button class="new-report-submit btn" style="display: none;">
+          <i class="fa fa-plus"></i>
+          Add Bulk Organization
+        </button>
+
+      </div>
+      <div class="list-report-content" *ngFor="let eachOrg of orgLIstArr; let i= index">
+        <a href="#demo{{i+1}}" class=" list-report-drop " data-bs-toggle="collapse">
+          <div class="list-report-sub-collapse">
+            <div class="report-id-div">
+              <i class="fa fa-angle-down"></i>
+              <p class="report-name">Organization Name</p>
+            </div>
+            <p class="list-report-sub-collapse-right">{{eachOrg.name}}</p>
+          </div>
+        </a>
+        <div id="demo{{i+1}}" class="collapse list-report-collapse">
+          <div class="list-report-sub-collapse">
+            <p class="list-report-sub-collapse-left">Super Admin Name</p>
+            <p class="list-report-sub-collapse-right">{{eachOrg.superAdminName}}</p>
+          </div>
+          <div class="list-report-sub-collapse">
+            <p class="list-report-sub-collapse-left">Address</p>
+            <p class="list-report-sub-collapse-right">{{eachOrg.address ? eachOrg.address : '--'}}</p>
+          </div>
+          <div class="list-report-sub-collapse">
+            <p class="list-report-sub-collapse-left">Contact</p>
+            <p class="list-report-sub-collapse-right">{{(eachOrg.contactNumber != null) ? eachOrg.contactNumber : '--'}}
+            </p>
+          </div>
+          <p class="list-report-more-text text-right"><a
+              routerLink="/users/app-org-details/{{eachOrg._id | customIdEncode}}"><b><i>Edit >></i></b></a></p>
+        </div>
+      </div>
+      <!-- <div class="list-report-content"> 
+          <a href="#demo2" class=" list-report-drop " data-bs-toggle="collapse">
+            <div class="list-report-sub-collapse">
+              <div class="report-id-div">
+                <i class="fa fa-angle-down"></i>
+                <p class="report-name">Organization Name</p>
+              </div>
+              <p class="list-report-sub-collapse-right">RGPV</p>
+            </div>              
+          </a>
+          <div id="demo2" class="collapse list-report-collapse">
+            <div class="list-report-sub-collapse">
+              <p class="list-report-sub-collapse-left">Super Admin Name</p>
+              <p class="list-report-sub-collapse-right">John Smith</p>
+            </div>
+            <div class="list-report-sub-collapse">
+              <p class="list-report-sub-collapse-left">Address</p>
+              <p class="list-report-sub-collapse-right">ply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap</p>
+            </div>
+            <div class="list-report-sub-collapse">
+              <p class="list-report-sub-collapse-left">Contact</p>
+              <p class="list-report-sub-collapse-right">Lorem IpSum</p>
+            </div>
+            <p class="list-report-more-text text-right"><a href="orgMoreDetails.html"><b><i>Edit >></i></b></a></p>
+          </div>
+        </div>  -->
+    </div>
+  </div>
+</section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#000000" type="ball-scale-multiple"></ngx-spinner>

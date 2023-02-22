@@ -1,0 +1,703 @@
+<section class="generate-report-div">
+    <div class="container">
+        <div class="generate-report-content-div">
+            <h2 class="generate-text">Generate Report</h2>
+            <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+                <div class="gr-subcontent">
+                    <div class="content-label">
+                        Understand any information submitted herein will be directly sent to school authorities for
+                        investigation. This form is ONLY to be used to report actual situations and is NOT to be used as
+                        a source for personal reasons beyond what is intended within the questions. By submitting this
+                        report you are accountable for the information you are submitting, you will be on record for
+                        submitting this report, and may be asked questions by the school authorities about your
+                        submission.
+                    </div>
+                    <div class="content-label">
+                        <label>DID THIS HAPPEN TO YOU OR SOMEONE ELSE ?</label>
+                        <div class="content-radio-btn">
+                            <div class="radio-yes-no mr-2">
+                                <input type="radio" name="happenedToWhom" value=true formControlName="happenedToWhom"
+                                    (click)="onCloseNameBox()">
+                                <p>YOU</p>
+                            </div>
+                            <div class="radio-yes-no">
+                                <input type="radio" name="happenedToWhom" value=false formControlName="happenedToWhom"
+                                    (click)="onOpenNameBox()">
+                                <p>SOMEONE ELSE</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-label" [hidden]="!showOtherNameBox">
+                        <label>TO WHOM DID IT HAPPEN ? </label>
+                        <div class="address-div">
+                            <input placeholder="Name" #elsesName formControlName="elsesName">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>DAY AND TIME OF WHEN IT HAPPENED ?</label>
+                    </div>
+                    <!-- <div class="content-label">
+                        <label>Incident Date </label>
+                        <div class="address-div">
+                            <div class="datePicker">
+                                <input matInput [matDatepicker]="picker4" placeholder="Select Date"
+                                    formControlName="incidentDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                <mat-datepicker #picker4></mat-datepicker>
+
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="content-label">
+                        <label>Incident Date </label>
+                        <ul class=" time-incident-ul">
+                            <li>
+                                <select formControlName="incidentMonth" (change)="clickMonth($event.target.value)">
+                                    <option value="">Month</option>
+                                    <option *ngFor="let i of monthArr">{{i.name}}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select formControlName="incidentDay">
+                                    <option value="">Date</option>
+                                    <option *ngFor="let i of dayArr">{{i}}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select formControlName="incidentYear">
+                                    <option value="">Year</option>
+                                    <option *ngFor="let i of yearArr">{{i}}</option>
+                                </select>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="content-label">
+                        <label>Incident Time </label>
+                        <ul class=" time-incident-ul">
+                            <li>
+                                <select formControlName="incidentHours">
+                                    <option value="">Hour</option>
+                                    <option *ngFor="let i of time_hour">{{i}}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select formControlName="incidentMinutes">
+                                    <option value="">Minute</option>
+                                    <option *ngFor="let i of time_min">{{i}}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select formControlName="amPm">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="content-label">
+                        <label>WHERE DID IT HAPPEN ?</label>
+                    </div>
+                    <div class="content-label">
+                        <label>Incident Location </label>
+                        <div class="address-div">
+                            <input placeholder="Address 1" formControlName="incidentAddress">
+                        </div>
+                        <div class="address-div">
+                            <input placeholder="Address 2" formControlName="incidentAddress2">
+                        </div>
+
+                        <div class="city-state">
+                            <input placeholder="City" formControlName="incidentCity">
+                            <input placeholder="State" formControlName="incidentState">
+                        </div>
+                        <div class="city-state">
+                            <input placeholder="Postal zip" formControlName="incidentZip">
+                            <select formControlName="incidentCountry">
+                                <option value="">Country</option>
+                                <option value="USA">USA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <label>Is there any suspect ?</label>
+                        <div class="content-radio-btn">
+                            <div class="radio-yes-no mr-2" for="chkYes">
+                                <input type="radio" id="chkYes" name="anySuspect" value=true
+                                    formControlName="anySuspect" (click)=ShowHideDiv()>
+                                <p>Yes</p>
+                            </div>
+                            <div class="radio-yes-no" for="chkNo">
+                                <input type="radio" id="chkNo" name="anySuspect" value=false
+                                    formControlName="anySuspect" (click)=ShowHideDiv()>
+                                <p>No</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="if-yes-suspect" id="dvtext" style="display: none">
+                        <input placeholder="Suspect Full Name" formControlName="suspectName">
+                        <input placeholder="Suspect Phone Number" formControlName="suspectPhone">
+                    </div>
+                    <div class="content-label">
+                        <label>Was there any Witness? If so , how many?</label>
+                        <div class="content-radio-btn" id="witness">
+                            <div class="radio-yes-no mr-2">
+                                <input type="radio" name="witnessCount" value="0" formControlName="witnessCount" checked
+                                    (click)="onClickWitnessRadio()">
+                                <p>No Witnesss</p>
+                            </div>
+                            <div class="radio-yes-no">
+                                <input type="radio" name="witnessCount" value="1" formControlName="witnessCount"
+                                    (click)="onClickWitnessRadio()">
+                                <p>1 Witness</p>
+                            </div>
+                            <div class="radio-yes-no">
+                                <input type="radio" name="witnessCount" value="2" formControlName="witnessCount"
+                                    (click)="onClickWitnessRadio()">
+                                <p>2 Witnesses</p>
+                            </div>
+                            <!-- <div class="radio-yes-no">
+                                <input type="radio" name="witnessCount" value="3" formControlName="witnessCount"
+                                    (click)="onClickWitnessRadio()">
+                                <p>More than 2 Witnesses</p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="if-yes-suspect" *ngIf="showOne">
+                        <input placeholder="Witness1 Name" formControlName="witness1Name">
+                        <input placeholder="Witness1 Phone Number" formControlName="witness1Contact">
+                        <input placeholder="Witness1 Email" formControlName="witness1Email">
+                    </div>
+                    <div class="if-yes-suspect" *ngIf="showTwo">
+                        <input placeholder="Witness2 Name" formControlName="witness2Name">
+                        <input placeholder="Witness2 Phone Number" formControlName="witness2Contact">
+                        <input placeholder="Witness2 Email" formControlName="witness2Email">
+                    </div>
+                    <div class="content-label">
+                        <label class="content-label-headings">1. BULLYING</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Physical
+                                <input type="checkbox" formControlName="physicalBullying">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Verbal
+                                <input type="checkbox" formControlName="verbalBullying">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Social Media / Cyber
+                                <input type="checkbox" formControlName="cyberBullying">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Other
+                                <input type="checkbox" formControlName="otherBullying">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="bullyingDescription">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">2. THREAT</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                To the school
+                                <input type="checkbox" formControlName="threatToSchool">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                To another student
+                                <input type="checkbox" formControlName="threatToStudent">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                To a teacher or staff member
+                                <input type="checkbox" formControlName="threatToTeacher">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                To you
+                                <input type="checkbox" formControlName="threatToYou">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Other
+                                <input type="checkbox" formControlName="threatToOthers">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <label>HOW DID YOU BECOME AWARE OF THIS ?</label>
+                    </div>
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="threatDescription">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">3. HEALTH</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                COVID
+                                <input type="checkbox" formControlName="covid">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Fever
+                                <input type="checkbox" formControlName="fever">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Flu
+                                <input type="checkbox" formControlName="flu">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Other
+                                <input type="checkbox" formControlName="otherHealth">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="healthDescription">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">4. SUSPICIOUS ACTIVITY</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Unusual behavior
+                                <input type="checkbox" formControlName="unusualBehaviour">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Vehicle driving slowly by school or students
+                                <input type="checkbox" formControlName="vehichleDrivingSlowly">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Leaving of a package, backpack, or any other unusual item
+                                <input type="checkbox" formControlName="leavingOfItem">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Random or unrecognized 
+                                <input type="checkbox" formControlName="randomActivity">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Other
+                                <input type="checkbox" formControlName="otherSuspiciousActivity">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <label>HOW DID YOU BECOME AWARE OF THIS ?</label>
+                    </div>
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="suspiciousDescription">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">5. UNWANTED OR INAPPROPRIATE SEXUAL ACTIVITY</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Sexual comments, words, pictures, suggestions, jokes, and/or gestures 
+                                <input type="checkbox" formControlName="sexualComments">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Sexual advances (i.e., verbal, nonverbal, or physical)
+                                <input type="checkbox" formControlName="sexualAdvances">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Technology - cyber, and/or social media-based harassment
+                                <input type="checkbox" formControlName="cyberHarrassment">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Requests, hints or threats for sexual favors 
+                                <input type="checkbox" formControlName="sexualFavours">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Flashing or mooning
+                                <input type="checkbox" formControlName="flashing">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Peeping
+                                <input type="checkbox" formControlName="peeping">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Stalking
+                                <input type="checkbox" formControlName="stalking">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Having hurtful sexual rumors intentionally communicated 
+                                <input type="checkbox" formControlName="sexualRumours">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Gripping, pulling, or grasping clothing in a sexual manner 
+                                <input type="checkbox" formControlName="gripPull">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Other
+                                <input type="checkbox" formControlName="otherSexualActivity">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="sexualActDescription">
+                        </div>
+                    </div>
+                    <!-- mental health questions -->
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="content-label">
+                        <h3><label>MENTAL WELLNESS QUESTIONS</label></h3>
+                    </div>
+                    <div class="content-label">
+                        <label class="content-label-headings">1. DEPRESSION</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Have you experienced extreme sadness or hopelessness?
+                                <input type="checkbox" formControlName="sadnessDepression">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Does your family have a history of depression?
+                                <input type="checkbox" formControlName="hisroryDepression">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have you turned to drinking or drug use to relieve feelings of hopelessness?
+                                <input type="checkbox" formControlName="hopelessDepression">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have you experienced thoughts of death or suicide?
+                                <input type="checkbox" formControlName="suicidalDepression">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Are you feeling unusually tired or having very low energy?
+                                <input type="checkbox" formControlName="lowEnergyDepression">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you feel bad about yourself, that you are a failure or are letting people down?
+                                <input type="checkbox" formControlName="failureDepression">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion" type="button">Depression Definition and Symptoms ></button>
+                        <div class="panel">
+                            <p innerHTML="{{depressionCrimeData}}"></p>
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="notesDepression">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">2. ANXIETY</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Are you experiencing anxious or worrisome thoughts on a daily basis?
+                                <input type="checkbox" formControlName="dailyAnxiety">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Are you experiencing trouble concentrating in school or work?
+                                <input type="checkbox" formControlName="concentrationAnxiety">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Are you plagued by fears others may find unfounded or irrational?
+                                <input type="checkbox" formControlName="fearAnxiety">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you avoid everyday social activities because they cause you anxiety?
+                                <input type="checkbox" formControlName="unsocialAnxiety">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you experience sudden rapid heartbeat, tightness or pain in your chest?
+                                <input type="checkbox" formControlName="healthAnxiety">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Is your anxiety interfering with your school, work, and/or relationships?
+                                <input type="checkbox" formControlName="interferingAnxiety">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion" type="button">Anxiety Definition and Symptoms ></button>
+                        <div class="panel">
+                            <p innerHTML="{{anxietyCrimeData}}"></p>
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="notesAnxiety">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">3. SUICIDAL THOUGHTS AND INTENT</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Have you had wishes to be dead? (past 1 month)
+                                <input type="checkbox" formControlName="deadwishSuicide">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Have you had suicidal thoughts (non-specific) in the last month? (Past 1 month)
+                                <input type="checkbox" formControlName="nonSpecificReasonSuicide">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have you had suicidal thoughts with some intent to act, without a specific plan? (Past 1
+                                month)
+                                <input type="checkbox" formControlName="nospecificReasonSuicide">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have you had active Suicidal thoughts with a specific plan and intent? (past 1 month)
+                                <input type="checkbox" formControlName="specificReasonSuicide">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have you had suicidal behavior anytime in your life?
+                                <input type="checkbox" formControlName="behaviourSuicide">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion" type="button">Suicidal Thoughts and Intent Definition and Symptoms
+                            ></button>
+                        <div class="panel">
+                            <p innerHTML="{{suicidalThoughtsCrimeData}}"></p>
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="notesSuicide">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">4. EATING DISORDERS</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Do you refuse to eat food or skip meals?
+                                <input type="checkbox" formControlName="refuseEatDisorder">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Do you fear eating out in public with others?
+                                <input type="checkbox" formControlName="publicEatDisorder">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you count calories out of a need for control?
+                                <input type="checkbox" formControlName="caloriesEatDisorder">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you follow strict eating habits that you feel guilty and ashamed for breaking?
+                                <input type="checkbox" formControlName="breakingEatDisorder">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Are you obsessed or dissatisfied with your weight or body shape?
+                                <input type="checkbox" formControlName="bodyShapeEatDisorder">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you find yourself eating large amounts of food and then purging, making yourself
+                                vomit, or feeling like you have to do something (e.g., exercise) to compensate for the
+                                food you just ate?
+                                <input type="checkbox" formControlName="vomitEatDisorder">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion" type="button">Eating Disorders Definition and Symptoms ></button>
+                        <div class="panel">
+                            <p innerHTML="{{eatingDisorderCrimeData}}"></p>
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="notesEatDisorder">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label class="content-label-headings">5. SUBSTANCE MISUSE</label>
+                        <p>Select all that apply</p>
+                        <div class="report-checkbox">
+                            <label class="checkox-container">
+                                Do you feel uncomfortable when drugs or alcohol are not available?
+                                <input type="checkbox" formControlName="drugsNASubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+
+                            <label class="checkox-container">
+                                Do you drink or use substances when you're disappointed or sad?
+                                <input type="checkbox" formControlName="drinkSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have you ever been unable to remember part of the previous evening, even though your
+                                friends say you didn't pass out?
+                                <input type="checkbox" formControlName="friendsSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Has a friend or family member expressed concern about your alcohol or drug use?
+                                <input type="checkbox" formControlName="concernSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Have any of your blood relatives ever had an addiction to drugs or alcohol?
+                                <input type="checkbox" formControlName="relativesSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you struggle to decrease your drug and alcohol use?
+                                <input type="checkbox" formControlName="struggleSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Has your using of alcohol or other drugs increased?
+                                <input type="checkbox" formControlName="alcoholSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you find yourself using when you had decided not to?
+                                <input type="checkbox" formControlName="decidedSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Are you having problems in your life that wouldn’t have happened if you had not used
+                                substances? (Relationships, home responsibilities, activities, work, or school)
+                                <input type="checkbox" formControlName="lifeSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                            <label class="checkox-container">
+                                Do you find yourself feeling restless, irritable, or upset when you don’t use?
+                                <input type="checkbox" formControlName="upsetSubstanceMisuse">
+                                <span class="mark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion" type="button">Substance Misuse Definition and Symptoms ></button>
+                        <div class="panel">
+                            <p innerHTML="{{substanceMisuseCrimeData}}"></p>
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Description/Notes </label>
+                        <div class="address-div">
+                            <input placeholder="Description" formControlName="notesSubstanceMisuse">
+                        </div>
+                    </div>
+
+                    <div class="content-label">
+                        <label>Please note:</label>
+                        <p>Follow your schools policies regarding any of the above mentioned topics</p>
+                    </div>
+
+                    <!-- <div class="content-label d-flex">
+                        <p class="org-detail-left">Upload Logo:</p>
+                        <div class="org-detail-right">
+                            <input type="file" class="upload-img-btn" accept="image/*" (change)="checkImage($event)"
+                                placeholder="Choose File">
+                        </div>
+                    </div> -->
+                    <div class="logo-img-preview">
+                        <label for="file-input">
+                            <img *ngIf="recent_image != ''" src="{{recent_image}}">
+                            <i class="fa fa-upload fa-border fa-5x" *ngIf="recent_image == ''"></i>
+                        </label>
+                        <input type="file" id="file-input" class="upload-img-btn" accept="image/*"
+                            (change)="checkImage($event)" placeholder="Choose File">
+                    </div>
+
+                    <button class="submit-btn btn-common" type="submit"> Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,816 @@
+<section class="generate-report-div">
+  <div class="container">
+    <div class="generate-report-content-div">
+      <h2 class="generate-text">Generate Report</h2>
+      <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+        <div class="gr-subcontent">
+          <div class="content-label">
+            <label>Incident Date </label>
+            <ul class=" time-incident-ul">
+              <li>
+                <select formControlName="incidentMonth" (change)="clickMonth($event.target.value)">
+                  <option value="">Month</option>
+                  <option *ngFor="let i of monthArr">{{i.name}}</option>
+                </select>
+              </li>
+              <li>
+                <select formControlName="incidentDay">
+                  <option value="">Date</option>
+                  <option *ngFor="let i of dayArr">{{i}}</option>
+                </select>
+              </li>
+              <li>
+                <select formControlName="incidentYear">
+                  <option value="">Year</option>
+                  <option *ngFor="let i of yearArr">{{i}}</option>
+                </select>
+              </li>
+
+            </ul>
+          </div>
+          <div class="content-label">
+            <label>Incident Time </label>
+            <ul class=" time-incident-ul">
+              <li>
+                <select formControlName="incidentHours">
+                  <option value="">Hour</option>
+                  <option *ngFor="let i of time_hour">{{i}}</option>
+                </select>
+              </li>
+              <li>
+                <select formControlName="incidentMinutes">
+                  <option value="">Minute</option>
+                  <option *ngFor="let i of time_min">{{i}}</option>
+                </select>
+              </li>
+              <li>
+                <select formControlName="amPm">
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </li>
+
+            </ul>
+          </div>
+          <div class="content-label">
+            <label>Incident Location </label>
+            <div class="address-div">
+              <input placeholder="Address 1" formControlName="incidentAddress">
+            </div>
+            <mat-error *ngIf="f.incidentAddress.touched || submitted">
+              <div *ngIf="f.incidentAddress.errors?.required">This field is required.</div>
+            </mat-error>
+            <div class="address-div">
+              <input placeholder="Address 2" formControlName="incidentAddress2">
+            </div>
+
+            <mat-error *ngIf="f.incidentAddress2.touched || submitted">
+              <div *ngIf="f.incidentAddress2.errors?.required">This field is required.</div>
+            </mat-error>
+            <div class="city-state">
+              <input placeholder="City" formControlName="incidentCity">
+              <!-- <mat-error *ngIf="f.incidentCity.touched || submitted">
+                <div *ngIf="f.incidentCity.errors?.required">This field is required.</div>
+              </mat-error>    -->
+              <input placeholder="State" formControlName="incidentState">
+              <!-- <mat-error *ngIf="f.incidentState.touched || submitted">
+                <div *ngIf="f.incidentState.errors?.required">This field is required.</div>
+              </mat-error>    -->
+            </div>
+            <div class="city-state">
+              <input placeholder="Postal zip" formControlName="incidentZip">
+              <!-- <mat-error *ngIf="f.incidentZip.touched || submitted">
+                <div *ngIf="f.incidentZip.errors?.required">This field is required.</div>
+              </mat-error>    -->
+              <select formControlName="incidentCountry">
+                <option value="">Country</option>
+                <option value="USA">USA</option>
+              </select>
+              <!-- <mat-error *ngIf="f.incidentCountry.touched || submitted">
+                <div *ngIf="f.incidentCountry.errors?.required">This field is required.</div>
+              </mat-error>    -->
+            </div>
+          </div>
+          <div class="content-label">
+            <label>Did the incident happen on an owned, controlled or lease property of institution ?
+            </label>
+            <div class="content-radio-btn">
+              <div class="radio-yes-no mr-2">
+                <input type="radio" name="onControlPropOfInst" value=true formControlName="onControlPropOfInst"
+                  (click)="onCloseStudentOrg()">
+                <p>Yes</p>
+              </div>
+              <div class="radio-yes-no">
+                <input type="radio" name="onControlPropOfInst" value=false formControlName="onControlPropOfInst"
+                  (click)="onOpenStudentOrg()">
+                <p>No</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-label" *ngIf="showStudentOrgDiv">
+            <label>Did the incident happen on property owned or controlled by an officially recognized student
+              organization ? </label>
+            <div class="content-radio-btn">
+              <div class="radio-yes-no mr-2">
+                <input type="radio" name="onControlStudentOrg" value=true formControlName="onControlStudentOrg"
+                  (click)="onClosePublicProperty()">
+                <p>Yes</p>
+              </div>
+              <div class="radio-yes-no">
+                <input type="radio" name="onControlStudentOrg" value=false formControlName="onControlStudentOrg"
+                  (click)="onOpenPublicProperty()">
+                <p>No</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-label" *ngIf="showPublicProperty">
+            <label>Did the incident happen on public property within the campus, or immediately adjacent to and
+              accessible from the campus ? </label>
+            <div class="content-radio-btn">
+              <div class="radio-yes-no mr-2">
+                <input type="radio" name="onControlPublicProperty" value=true formControlName="onControlPublicProperty">
+                <p>Yes</p>
+              </div>
+              <div class="radio-yes-no">
+                <input type="radio" name="onControlPublicProperty" value=false
+                  formControlName="onControlPublicProperty">
+                <p>No</p>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label>Victim Info </label>
+            <ul class="victim-info-ul">
+              <li><input placeholder="First Name" formControlName="victimFirstName"></li>
+              <!-- <mat-error *ngIf="f.victimFirstName.touched || submitted">
+                <div *ngIf="f.victimFirstName.errors?.required">This field is required.</div>
+              </mat-error>   -->
+              <li><input placeholder="Last Name" formControlName="victimLastName"></li>
+              <!-- <mat-error *ngIf="f.victimLastName.touched || submitted">
+                <div *ngIf="f.victimLastName.errors?.required">This field is required.</div>
+              </mat-error>   -->
+              <li><input placeholder="Phone" formControlName="victimPhone"></li>
+              <!-- <mat-error *ngIf="f.victimPhone.touched || submitted">
+                <div *ngIf="f.victimPhone.errors?.required">This field is required.</div>
+              </mat-error>   -->
+              <li><input placeholder="Email" formControlName="victimEmail"></li>
+              <!-- <mat-error *ngIf="f.victimEmail.touched || submitted">
+                <div *ngIf="f.victimEmail.errors?.required">This field is required.</div>
+              </mat-error>   -->
+            </ul>
+          </div>
+          <div class="content-label">
+            <label>Is there any suspect ?</label>
+            <div class="content-radio-btn">
+              <div class="radio-yes-no mr-2" for="chkYes">
+                <input type="radio" id="chkYes" name="anySuspect" value=true formControlName="anySuspect"
+                  (click)=ShowHideDiv()>
+                <p>Yes</p>
+              </div>
+              <div class="radio-yes-no" for="chkNo">
+                <input type="radio" id="chkNo" name="anySuspect" value=false formControlName="anySuspect"
+                  (click)=ShowHideDiv()>
+                <p>No</p>
+              </div>
+            </div>
+          </div>
+          <div class="if-yes-suspect" id="dvtext" style="display: none">
+            <input placeholder="Suspect Full Name" formControlName="suspectName">
+            <!-- <mat-error *ngIf="f.suspectName.touched || submitted">
+              <div *ngIf="f.suspectName.errors?.required">This field is required.</div>
+            </mat-error>  -->
+            <input placeholder="Suspect Phone Number" formControlName="suspectPhone">
+            <!-- <mat-error *ngIf="f.suspectPhone.touched || submitted">
+              <div *ngIf="f.suspectPhone.errors?.required">This field is required.</div>
+            </mat-error>  -->
+          </div>
+          <div class="content-label">
+            <label>Was there any Witness? If so , how many?</label>
+            <div class="content-radio-btn" id="witness">
+              <div class="radio-yes-no mr-2">
+                <input type="radio" name="witnessCount" value="0" formControlName="witnessCount" checked
+                  (click)="onClickWitnessRadio()">
+                <p>No Witnesss</p>
+              </div>
+              <div class="radio-yes-no">
+                <input type="radio" name="witnessCount" value="1" formControlName="witnessCount"
+                  (click)="onClickWitnessRadio()">
+                <p>1 Witness</p>
+              </div>
+              <div class="radio-yes-no">
+                <input type="radio" name="witnessCount" value="2" formControlName="witnessCount"
+                  (click)="onClickWitnessRadio()">
+                <p>2 Witnesses</p>
+              </div>
+              <!-- <div class="radio-yes-no">
+                <input type="radio" name="witnessCount" value="3" formControlName="witnessCount"
+                  (click)="onClickWitnessRadio()">
+                <p>More than 2 Witnesses</p>
+              </div> -->
+            </div>
+          </div>
+          <div class="if-yes-suspect" *ngIf="showOne">
+            <input placeholder="Witness1 Name" formControlName="witness1Name">
+            <!-- <mat-error *ngIf="f.witness1Name.touched || submitted">
+              <div *ngIf="f.witness1Name.errors?.required">This field is required.</div>
+            </mat-error>  -->
+            <input placeholder="Witness1 Phone Number" formControlName="witness1Contact">
+            <!-- <mat-error *ngIf="f.witness1Contact.touched || submitted">
+              <div *ngIf="f.witness1Contact.errors?.required">This field is required.</div>
+            </mat-error>  -->
+            <input placeholder="Witness1 Email" formControlName="witness1Email">
+            <!-- <mat-error *ngIf="f.witness1Email.touched || submitted">
+              <div *ngIf="f.witness1Email.errors?.required">This field is required.</div>
+            </mat-error>  -->
+          </div>
+          <div class="if-yes-suspect" *ngIf="showTwo">
+            <input placeholder="Witness2 Name" formControlName="witness2Name">
+            <!-- <mat-error *ngIf="f.witness2Name.touched || submitted">
+              <div *ngIf="f.witness2Name.errors?.required">This field is required.</div>
+            </mat-error>  -->
+            <input placeholder="Witness2 Phone Number" formControlName="witness2Contact">
+            <!-- <mat-error *ngIf="f.witness2Contact.touched || submitted">
+              <div *ngIf="f.witness2Contact.errors?.required">This field is required.</div>
+            </mat-error>  -->
+            <input placeholder="Witness2 Email" formControlName="witness2Email">
+            <!-- <mat-error *ngIf="f.witness2Email.touched || submitted">
+              <div *ngIf="f.witness2Email.errors?.required">This field is required.</div>
+            </mat-error>  -->
+          </div>
+          <div class="content-label">
+          </div>
+          <hr>
+          <div class="header-content-label">
+            <h2><label>PRIMARY CLERY CRIME DETAILS</label></h2>
+            <p>Select all that apply</p><br />
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">1. CRIMINAL HOMICIDE</label>
+            <p>Check all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Murder & Non-negligent manslaughter
+                <input type="checkbox" formControlName="nonNegligentSlaughter">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Negligent manslaughter
+                <input type="checkbox" formControlName="negligentSlaughter">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('criminal_homicide')">Criminal Homicide Crime
+                  Definitions ></a> </p> -->
+              <div>
+                <button class="accordion" type="button">Criminal Homicide Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{criminalHomicideCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">2. SEXUAL OFFENSES</label>
+            <p>Any sexual act directed against another person, without the consent of the victim, including instances
+              where the victim is incapable of giving consent. Check all that apply.</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Rape
+                <input type="checkbox" formControlName="rape">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Fondling
+                <input type="checkbox" formControlName="pending">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Incest
+                <input type="checkbox" formControlName="incest">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Statutory Rape
+                <input type="checkbox" formControlName="sRape">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('sexual_assault')">Sex Offence Crime Definitions
+                  ></a> </p> -->
+              <div>
+                <button class="accordion" type="button">Sex Offence Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{sexualAssaultCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">3. OTHER</label>
+            <p>Check all the apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Robbery
+                <input type="checkbox" formControlName="robbery">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Aggravated assault
+                <input type="checkbox" formControlName="AggrAssault">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Burglary
+                <input type="checkbox" formControlName="burglary">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Arson
+                <input type="checkbox" formControlName="otherArson">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Motor Vehicle Theft
+                <input type="checkbox" formControlName="otherMotorTheft">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('others')">Other Crime Definitions ></a>
+              </p> -->
+              <div>
+                <button class="accordion" type="button">Other Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{othersCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">4. CLERY ARRESTS/REFERRALS</label>
+            <p>Check all the apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Weapons Law Violation
+                <input type="checkbox" formControlName="wLawViolate">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Drug Abuse Violation
+                <input type="checkbox" formControlName="dAbuseViolate">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Liquior Law Violation
+                <input type="checkbox" formControlName="lLawViolate">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('clery_arrest')">Clery Arrests/Referrals Crime
+                  Definitions >
+                </a> </p> -->
+              <div>
+                <button class="accordion" type="button">Clery Arrests/Referrals Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{cleryArrestCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">5. CLERY HATE CRIMES</label>
+            <p>Check all the apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Larceny-theft
+                <input type="checkbox" formControlName="larcencyTheft">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Simple Assault
+                <input type="checkbox" formControlName="simpleAssault">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Intimidation
+                <input type="checkbox" formControlName="intimidation">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Destruction / damage / vandalism of property
+                <input type="checkbox" formControlName="desDamage">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('clery_hate_crimes')">Clery Hate Crimes
+                  Definitions
+                  >
+                </a> </p> -->
+              <div>
+                <button class="accordion" type="button">Clery Hate Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{cleryHateCrimesCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">6. BIAS CATEGORIES</label>
+            <p>Check all the apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Race
+                <input type="checkbox" formControlName="race">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Gender
+                <input type="checkbox" formControlName="gender">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Religion
+                <input type="checkbox" formControlName="religion">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                National Origin
+                <input type="checkbox" formControlName="natOrigin">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Sexual Orientation
+                <input type="checkbox" formControlName="sexOrientation">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Gender Identity
+                <input type="checkbox" formControlName="genderIdentity">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Ethnicity
+                <input type="checkbox" formControlName="ethnicity">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Disability
+                <input type="checkbox" formControlName="disability">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('bias_category')">Bias Categories Crime
+                  Definitions > </a> </p> -->
+              <div>
+                <button class="accordion" type="button">Bias Categories Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{biasCategoryCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">7. CLERY SEXUAL VIOLENCE CRIMES</label>
+            <p>Check all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Domestic Violence
+                <input type="checkbox" formControlName="domViolence">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Dating Violence
+                <input type="checkbox" formControlName="datingViolence">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Stalking
+                <input type="checkbox" formControlName="stalking">
+                <span class="mark"></span>
+              </label>
+              <!-- <p class="content-label-anchor"><a (click)="openPopUp('clery_violence_crimes')">Clery Sexual Violence
+                  Crime
+                  Definitions > </a> </p> -->
+              <div>
+                <button class="accordion" type="button">Clery Sexual Violence Crime Definitions ></button>
+                <div class="panel">
+                  <p innerHTML="{{cleryViolenceCrimesCrimeData}}"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings"> OTHERS / NON CLERY</label>
+            <p>Check all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                <b>Threat</b>
+                <input type="checkbox" formControlName="threat">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                <b>Health Risk</b>
+                <input type="checkbox" formControlName="healthRisk">
+                <span class="mark"></span>
+              </label>
+            </div>
+          </div>
+          <!-- mental health questions -->
+          <br>
+          <hr>
+          <br>
+          <div class="content-label">
+            <h3><label>MENTAL WELLNESS QUESTIONS</label></h3>
+          </div>
+          <div class="content-label">
+            <label class="content-label-headings">1. DEPRESSION</label>
+            <p>Select all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Have you experienced extreme sadness or hopelessness?
+                <input type="checkbox" formControlName="sadnessDepression">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Does your family have a history of depression?
+                <input type="checkbox" formControlName="hisroryDepression">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have you turned to drinking or drug use to relieve feelings of hopelessness?
+                <input type="checkbox" formControlName="hopelessDepression">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have you experienced thoughts of death or suicide?
+                <input type="checkbox" formControlName="suicidalDepression">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Are you feeling unusually tired or having very low energy?
+                <input type="checkbox" formControlName="lowEnergyDepression">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you feel bad about yourself, that you are a failure or are letting people down?
+                <input type="checkbox" formControlName="failureDepression">
+                <span class="mark"></span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button class="accordion" type="button">Depression Definition and Symptoms ></button>
+            <div class="panel">
+              <p innerHTML="{{depressionCrimeData}}"></p>
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label>Description/Notes </label>
+            <div class="address-div">
+              <input placeholder="Description" formControlName="notesDepression">
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label class="content-label-headings">2. ANXIETY</label>
+            <p>Select all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Are you experiencing anxious or worrisome thoughts on a daily basis?
+                <input type="checkbox" formControlName="dailyAnxiety">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Are you experiencing trouble concentrating in school or work?
+                <input type="checkbox" formControlName="concentrationAnxiety">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Are you plagued by fears others may find unfounded or irrational?
+                <input type="checkbox" formControlName="fearAnxiety">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you avoid everyday social activities because they cause you anxiety?
+                <input type="checkbox" formControlName="unsocialAnxiety">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you experience sudden rapid heartbeat, tightness or pain in your chest?
+                <input type="checkbox" formControlName="healthAnxiety">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Is your anxiety interfering with your school, work, and/or relationships?
+                <input type="checkbox" formControlName="interferingAnxiety">
+                <span class="mark"></span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button class="accordion" type="button">Anxiety Definition and Symptoms ></button>
+            <div class="panel">
+              <p innerHTML="{{anxietyCrimeData}}"></p>
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label>Description/Notes </label>
+            <div class="address-div">
+              <input placeholder="Description" formControlName="notesAnxiety">
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label class="content-label-headings">3. SUICIDAL THOUGHTS AND INTENT</label>
+            <p>Select all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Have you had wishes to be dead? (past 1 month)
+                <input type="checkbox" formControlName="deadwishSuicide">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Have you had suicidal thoughts (non-specific) in the last month? (Past 1 month)
+                <input type="checkbox" formControlName="nonSpecificReasonSuicide">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have you had suicidal thoughts with some intent to act, without a specific plan? (Past 1
+                month)
+                <input type="checkbox" formControlName="nospecificReasonSuicide">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have you had active Suicidal thoughts with a specific plan and intent? (past 1 month)
+                <input type="checkbox" formControlName="specificReasonSuicide">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have you had suicidal behavior anytime in your life?
+                <input type="checkbox" formControlName="behaviourSuicide">
+                <span class="mark"></span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button class="accordion" type="button">Suicidal Thoughts and Intent Definition and Symptoms ></button>
+            <div class="panel">
+              <p innerHTML="{{suicidalThoughtsCrimeData}}"></p>
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label>Description/Notes </label>
+            <div class="address-div">
+              <input placeholder="Description" formControlName="notesSuicide">
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label class="content-label-headings">4. EATING DISORDERS</label>
+            <p>Select all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Do you refuse to eat food or skip meals?
+                <input type="checkbox" formControlName="refuseEatDisorder">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Do you fear eating out in public with others?
+                <input type="checkbox" formControlName="publicEatDisorder">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you count calories out of a need for control?
+                <input type="checkbox" formControlName="caloriesEatDisorder">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you follow strict eating habits that you feel guilty and ashamed for breaking?
+                <input type="checkbox" formControlName="breakingEatDisorder">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Are you obsessed or dissatisfied with your weight or body shape?
+                <input type="checkbox" formControlName="bodyShapeEatDisorder">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you find yourself eating large amounts of food and then purging, making yourself
+                vomit, or feeling like you have to do something (e.g., exercise) to compensate for the
+                food you just ate?
+                <input type="checkbox" formControlName="vomitEatDisorder">
+                <span class="mark"></span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button class="accordion" type="button">Eating Disorders Definition and Symptoms ></button>
+            <div class="panel">
+              <p innerHTML="{{eatingDisorderCrimeData}}"></p>
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label>Description/Notes </label>
+            <div class="address-div">
+              <input placeholder="Description" formControlName="notesEatDisorder">
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label class="content-label-headings">5. SUBSTANCE MISUSE</label>
+            <p>Select all that apply</p>
+            <div class="report-checkbox">
+              <label class="checkox-container">
+                Do you feel uncomfortable when drugs or alcohol are not available?
+                <input type="checkbox" formControlName="drugsNASubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+
+              <label class="checkox-container">
+                Do you drink or use substances when you're disappointed or sad?
+                <input type="checkbox" formControlName="drinkSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have you ever been unable to remember part of the previous evening, even though your friends say you
+                didn't pass out?
+                <input type="checkbox" formControlName="friendsSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Has a friend or family member expressed concern about your alcohol or drug use?
+                <input type="checkbox" formControlName="concernSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Have any of your blood relatives ever had an addiction to drugs or alcohol?
+                <input type="checkbox" formControlName="relativesSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you struggle to decrease your drug and alcohol use?
+                <input type="checkbox" formControlName="struggleSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Has your using of alcohol or other drugs increased?
+                <input type="checkbox" formControlName="alcoholSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you find yourself using when you had decided not to?
+                <input type="checkbox" formControlName="decidedSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Are you having problems in your life that wouldn’t have happened if you had not used substances?
+                (Relationships, home responsibilities, activities, work, or school)
+                <input type="checkbox" formControlName="lifeSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+              <label class="checkox-container">
+                Do you find yourself feeling restless, irritable, or upset when you don’t use?
+                <input type="checkbox" formControlName="upsetSubstanceMisuse">
+                <span class="mark"></span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button class="accordion" type="button">Substance Misuse Definition and Symptoms ></button>
+            <div class="panel">
+              <p innerHTML="{{substanceMisuseCrimeData}}"></p>
+            </div>
+          </div>
+
+          <div class="content-label">
+            <label>Description/Notes </label>
+            <div class="address-div">
+              <input placeholder="Description" formControlName="notesSubstanceMisuse">
+            </div>
+          </div>
+          <div class="note-div">
+            <p>Note</p>
+            <textarea formControlName="note"></textarea>
+          </div>
+
+          <div class="logo-img-preview">
+            <label for="file-input">
+              <img *ngIf="recent_image != ''" src="{{recent_image}}">
+              <i class="fa fa-upload fa-border fa-5x" *ngIf="recent_image == ''"></i>
+            </label>
+            <input type="file" id="file-input" class="upload-img-btn" accept="image/*" (change)="checkImage($event)"
+              placeholder="Choose File">
+          </div>
+          <button class="submit-btn btn-common" type="submit"> Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+
+   <section class="sign-in-page">
+    <div class="container">
+        <div class="sign-in-content">
+            <div class="orange-div">
+                <p class="welcome-text">Welcome</p>
+                <p class="welcome-subtext">Sign In</p>
+            </div>
+            <div class="sign-in-form">
+                <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3 mt-3 form-div-content">
+                      <mat-form-field>
+                        <mat-label for="email">Email</mat-label>
+                        <input type="email" matInput formControlName="loginemail" class="" id="email" placeholder="Enter email" name="email">
+                        <mat-error *ngIf="f.loginemail.errors">
+                          <div
+                            *ngIf="
+                              (f.loginemail.touched || submitted) &&
+                              f.loginemail.errors?.required
+                            "
+                          >
+                          This field is required.
+                          </div>
+                          <div
+                            *ngIf="
+                              (f.loginemail.touched || submitted) &&
+                              f.loginemail.errors?.pattern
+                            "
+                          >
+                          Invalid Email
+                          </div>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="mb-3 form-div-content">
+                      <mat-form-field>
+                        <mat-label for="pwd">Password</mat-label>
+                        <input type="password" matInput formControlName="loginpassword" class="" id="pwd" placeholder="Enter password" name="pswd">
+                        <mat-error *ngIf="f.loginpassword.errors">
+                          <div
+                            *ngIf="
+                              (f.loginpassword.touched || submitted) &&
+                              f.loginpassword.errors?.required
+                            "
+                          >
+                          This field is required.
+                          </div>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <!-- <a href="" class="forgot-pass-text mb-3"> Forgot Password</a> -->
+                    <button type="submit" class="btn-common mt-md-2 sign-in-btn ">Sign in</button>
+
+                  </form>
+                  <div class="reset-signin">
+                    <a routerLink="/forgot-password"> Forgot Password</a>
+                  </div>
+            </div>
+        </div>
+    </div>
+   </section> 
+
+   <ngx-spinner 
+   bdColor="rgba(51,51,51,0.8)"
+   size="large"
+   color="#000000"
+   type="ball-scale-multiple"></ngx-spinner>
